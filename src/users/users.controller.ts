@@ -8,6 +8,7 @@ export class UsersController {
 
   @Post()
   public create(@Body() user) {
-    return this.usersService.create(user);
+    const createdUser = this.usersService.create(user);
+    return createdUser;
   }
 }
