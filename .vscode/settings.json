@@ -1,0 +1,11 @@
+{
+  "files.exclude": {
+    ".vscode": true,
+    "dist": true,
+    "node_modules": true,
+    "src/**/*.spec.ts": true,
+    "test": true,
+    "package-lock.json": true,
+    "README.md": true
+  }
+}
