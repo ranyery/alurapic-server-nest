@@ -4,5 +4,5 @@ export class User {
   email: string;
   password: string;
   fullname: string;
-  registerDate: Date;
+  registerDate?: Date;
 }
