@@ -2,10 +2,13 @@ import {
   Body,
   Controller,
   Get,
+  HttpStatus,
   NotFoundException,
   Param,
   Post,
 } from '@nestjs/common';
+import { NestResponse } from '../core/http/nest-response';
+import { NestResponseBuilder } from '../core/http/nest-response-builder';
 
 import { User } from './user.entity';
 import { UsersService } from './users.services';
@@ -15,9 +18,16 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  public create(@Body() user: User): User {
+  public create(@Body() user: User): NestResponse {
     const createdUser = this.usersService.create(user);
-    return createdUser;
+
+    const response = new NestResponseBuilder()
+      .setStatus(HttpStatus.CREATED)
+      .setHeaders({ Location: `/users/${createdUser.username}` })
+      .setBody(createdUser)
+      .build();
+
+    return response;
   }
 
   @Get()
